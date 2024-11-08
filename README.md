@@ -22,3 +22,5 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+Entrez le nom de la ville et cliquez sur search. Vous laisserez ainsi la magie s'opérer sous vos yeux.
