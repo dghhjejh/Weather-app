@@ -94,7 +94,7 @@ const created = async() =>{
             temperature.value = Math.round(weatherData.value.main.temp);
             date.value = `${d.getDate()} ${monthNames[d.getMonth()]} ${d.getFullYear()}`;
             description.value = weatherData.value.weather[0].description;
-            time.value = d.getHours() + ":" + d.getMinutes()  + ":" + d.getSeconds();
+            time.value = d.getHours() + " : " + d.getMinutes();
             name.value = weatherData.value.name;
             wind.value = weatherData.value.wind.speed;
             sea_level.value = weatherData.value.main.sea_level;
