@@ -6,7 +6,7 @@
                     <h2 class="mb-1 day">Today</h2>
                     <p class="text-light date mb-0">{{ date }}</p>
                     <small>{{ time }}</small>
-                    <h2 class="place">{{ name }}<small>{{ country }}</small></h2>
+                    <h2 class="place">{{ name }} <small>{{ country }}</small></h2>
                     <div class="temp">
                         <h1 class="weather-temp">{{ temperature }}&deg;</h1>
                         <h2 class="text-light">{{ description }} <img :src="iconUrl"></h2>
@@ -19,7 +19,7 @@
                     <tr>
                         <th>Sea level</th>
                         <th v-if="sea_level>0">{{ sea_level }}</th>
-                        <th v-else>Null</th>
+                        <th v-else></th>
                     </tr>
                     <tr>
                         <th>Humidity</th>
@@ -48,6 +48,7 @@
 import 'font-awesome/css/font-awesome.min.css';
 import DaysWeather from './DaysWeather.vue';
 import {ref, onMounted, defineProps } from 'vue';
+import moment from "moment-timezone";
 import axios from "axios";
 const props = defineProps({
     city:{
@@ -84,7 +85,15 @@ const monthNames = [
   "Novembre",
   "Décembre"
 ]
+const getCountryDateTime = (countryCode) =>{
+    const timezone = moment.tz.zonesForCountry(countryCode)[0];
+    const datetime = moment().tz(timezone);
+    return {
+        date: datetime.format("YYYY-MM-DD"),
+        time: datetime.format("HH:mm")
+    }
 
+}
 const created = async() =>{
     try{
         if(ville.value != ""){
@@ -94,11 +103,15 @@ const created = async() =>{
             temperature.value = Math.round(weatherData.value.main.temp);
             date.value = `${d.getDate()} ${monthNames[d.getMonth()]} ${d.getFullYear()}`;
             description.value = weatherData.value.weather[0].description;
+            country.value = weatherData.value.sys.country;
             time.value = d.getHours() + " : " + d.getMinutes();
+            if (country.value != null){
+                time.value = getCountryDateTime(country.value).time;
+                date.value = getCountryDateTime(country.value).date;
+            }
             name.value = weatherData.value.name;
             wind.value = weatherData.value.wind.speed;
             sea_level.value = weatherData.value.main.sea_level;
-            country.value = weatherData.value.sys.country;
             humidity.value = weatherData.value.main.humidity;
             console.log(weatherData.value)
 
