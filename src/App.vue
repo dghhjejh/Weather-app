@@ -38,6 +38,6 @@ body{
   margin-top: 5rem;
 }
 .btn-search{
-    background-image: linear-gradient(to right, cyan, magenta);
+    background-image: linear-gradient(to right, cyan);
 }
 </style>

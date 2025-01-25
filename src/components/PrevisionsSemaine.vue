@@ -214,7 +214,7 @@ tr:hover{
 }
 
 .change_btn{
-    background-image: linear-gradient(to right, cyan, magenta);
+    background-image: linear-gradient(to right, cyan);
 }
 
 .change_btn:hover{
