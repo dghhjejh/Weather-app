@@ -45,6 +45,7 @@
 </template>
 
 <script setup>
+//import {toast} from "vue3-toastify"
 import 'font-awesome/css/font-awesome.min.css';
 import DaysWeather from './DaysWeather.vue';
 import {ref, onMounted, defineProps } from 'vue';
@@ -94,6 +95,11 @@ const getCountryDateTime = (countryCode) =>{
     }
 
 }
+/*const notify = (error) => {
+      toast(error, {
+        autoClose: 1000,
+      });
+    }*/
 const created = async() =>{
     try{
         if(ville.value != ""){
@@ -115,10 +121,10 @@ const created = async() =>{
             humidity.value = weatherData.value.main.humidity;
             console.log(weatherData.value)
 
-        }
-       
+        } 
     }catch(e){
         console.error(e);
+        //notify("city not found");
     }
    
 }
